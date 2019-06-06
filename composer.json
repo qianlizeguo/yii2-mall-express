@@ -1,5 +1,5 @@
 {
-    "name": "qianlizeguo/yii2-hejiang-express",
+    "name": "qianlizeguo/yii2-mall-express",
     "description": "A waybill tracking library for Yii2, supported almost every express in China.",
     "type": "library",
     "require": {

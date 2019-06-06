@@ -1,6 +1,5 @@
-# Hejiang-Express
+# Mall-Express
 
-Thanks for your attention. This package is only used for my company projects, please do NOT use it in your product environment.
 
 ## Usage
 
@@ -12,4 +11,3 @@ See `getSupportedExpresses()` method in each `Tracker`.
 
 ## About
 
-Working at: [Zhejiang Hejiang Technology Co., Ltd.](http://www.zjhejiang.com/)
