@@ -140,7 +140,7 @@ class Kuaidiniao extends BaseTracker implements TrackerInterface
             'DataType' => '2',
         ];
         $curl->post(
-            'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx',
+            'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx',
             $postContent
         );
         $response = static::getJsonResponse($curl);
@@ -155,7 +155,7 @@ class Kuaidiniao extends BaseTracker implements TrackerInterface
         ];
         $waybill->status = $statusMap[intval($response->State)];
         foreach ($response->Traces as $trace) {
-            $waybill->traces->append($trace->AcceptTime, $trace->AcceptStation, $trace->Remark);
+            $waybill->traces->append($trace->AcceptTime, $trace->AcceptStation, isset($trace->Remark)?$trace->Remark:'');
         }
     }
 }

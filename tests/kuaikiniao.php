@@ -21,9 +21,9 @@ $wb = \Yii::createObject(
 
 $tracker = \Yii::createObject(
     [
-        'class' => 'Hejiang\Express\Trackers\kuaidi100',
-        'CustomerId' => '0C088E72F7CE40DC31721EE',
-        'AppKey' => 'vHjOxE***3'
+        'class' => 'Hejiang\Express\Trackers\kuaidiniao',
+        'EBusinessID' => '134',
+        'AppKey' => '125386ef-7ae6-48f5-b398-'
     ]
 );
 
