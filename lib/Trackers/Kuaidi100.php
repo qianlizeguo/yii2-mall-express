@@ -5,6 +5,7 @@ namespace Hejiang\Express\Trackers;
 use Hejiang\Express\Exceptions\TrackingException;
 use Hejiang\Express\Status;
 use Hejiang\Express\Waybill;
+use yii\helpers\VarDumper;
 
 class Kuaidi100 extends BaseTracker implements TrackerInterface
 {
@@ -167,14 +168,14 @@ class Kuaidi100 extends BaseTracker implements TrackerInterface
             'to' => '',
             'resultv2' => 0
         ]);
-        $sign = md5($param . $this->AppKey . $this->CustomerId);
+        $sign = strtoupper(md5($param . $this->AppKey . $this->CustomerId));
         $apiUrl = 'http://poll.kuaidi100.com/poll/query.do?customer=' . $this->CustomerId
-            . '&param=' . $param
-            . '&sign=' . $sign;
+            . '&sign=' . $sign
+            . '&param=' . $param;
         $curl = static::httpGet($apiUrl);
         $response = static::getJsonResponse($curl);
 
-        if ($response->status != 200) {
+        if (!isset($response->status) || $response->status != 200) {
             throw new TrackingException($response->message, $response);
         }
         $statusMap = [
@@ -188,7 +189,7 @@ class Kuaidi100 extends BaseTracker implements TrackerInterface
         ];
         $waybill->status = $statusMap[intval($response->state)];
         foreach ($response->data as $trace) {
-            $waybill->traces->append($trace->time, $trace->context, $trace->location);
+            $waybill->traces->append($trace->time, $trace->context, isset($trace->location) ?$trace->location: '');
         }
     }
 }

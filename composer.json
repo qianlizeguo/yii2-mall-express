@@ -3,7 +3,7 @@
     "description": "A waybill tracking library for Yii2, supported almost every express in China.",
     "type": "library",
     "require": {
-        "php": ">=5.4",
+        "php": ">=7.0",
         "yiisoft/yii2": "~2.0.5",
         "curl/curl": "^1.5"
     },
@@ -16,6 +16,12 @@
     "autoload": {
         "psr-4": {
             "Hejiang\\Express\\" : "lib/"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }
