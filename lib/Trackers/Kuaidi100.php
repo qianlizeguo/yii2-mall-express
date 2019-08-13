@@ -159,16 +159,18 @@ class Kuaidi100 extends BaseTracker implements TrackerInterface
 
     public function track(Waybill $waybill)
     {
-        $param = [
+        $param = json_encode([
             'com' => urlencode(static::getExpressCode($waybill->express)),
             'num' => urlencode($waybill->id),
             'from' => '',
             'phone' => '',
             'to' => '',
             'resultv2' => 0
-        ];
-        $apiUrl = 'http://poll.kuaidi100.com/poll/query.do??customer=' . $this->CustomerId
-            . '&param=' . json_encode($param);
+        ]);
+        $sign = md5($param . $this->AppKey . $this->CustomerId);
+        $apiUrl = 'http://poll.kuaidi100.com/poll/query.do?customer=' . $this->CustomerId
+            . '&param=' . $param
+            . '&sign=' . $sign;
         $curl = static::httpGet($apiUrl);
         $response = static::getJsonResponse($curl);
 
