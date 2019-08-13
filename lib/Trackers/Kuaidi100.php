@@ -10,6 +10,9 @@ class Kuaidi100 extends BaseTracker implements TrackerInterface
 {
     use TrackerTrait;
 
+    public $CustomerId;
+    public $AppKey;
+
     public static function getSupportedExpresses()
     {
         return [
@@ -156,10 +159,16 @@ class Kuaidi100 extends BaseTracker implements TrackerInterface
 
     public function track(Waybill $waybill)
     {
-        $apiUrl = 'http://www.kuaidi100.com/query?type='
-            . urlencode(static::getExpressCode($waybill->express))
-            . '&postid='
-            . urlencode($waybill->id);
+        $param = [
+            'com' => urlencode(static::getExpressCode($waybill->express)),
+            'num' => urlencode($waybill->id),
+            'from' => '',
+            'phone' => '',
+            'to' => '',
+            'resultv2' => 0
+        ];
+        $apiUrl = 'http://poll.kuaidi100.com/poll/query.do??customer=' . $this->CustomerId
+            . '&param=' . json_encode($param);
         $curl = static::httpGet($apiUrl);
         $response = static::getJsonResponse($curl);
 
